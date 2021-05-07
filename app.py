@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import Request
+from flask import request
 from jinja2 import Template
 app = Flask(__name__)
 
@@ -13,9 +13,9 @@ def modis():
 
 @app.route("/useragent")
 def useragent():
-    template = "mon user agent est {{ ua }}"
+    template = """mon user agent est: {{ ua }}"""
     data = {
-        "ua": Request.headers.get('User-Agent')
+        "ua": request.user_agent.string
     }
     jtemplate = Template(template)
     return jtemplate.render(data)
